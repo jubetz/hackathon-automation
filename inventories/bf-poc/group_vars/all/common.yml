@@ -1,0 +1,6 @@
+---
+fabric_name: bf-poc
+bgp_asn_prefix: 651
+underlay_loopback_subnet: 10.0.1
+vxlan_local_loopback_subnet: 10.10.10
+mlag_sysmac_prefix: 44:38:39:BE:EF

@@ -1,0 +1,41 @@
+---
+leaf_vlan10:
+  name: leaf_vlan10
+  id: 10
+  extras:
+    - "ip-forward off"
+    - "ip6-forward off"
+leaf_vlan20:
+  name: leaf_vlan20
+  id: 20
+  extras:
+    - "ip-forward off"
+    - "ip6-forward off"
+border01_vlan10:
+  name: border01_vlan10
+  id: 10
+  address:
+    - "10.1.10.2/24"
+  address_virtual:
+    - "00:00:00:00:00:1a 10.1.10.1/24"
+border02_vlan10:
+  name: border02-vlan10
+  id: 10
+  address:
+    - "10.1.10.3/24"
+  address_virtual:
+    - "00:00:00:00:00:1a 10.1.10.1/24"
+border01_vlan20:
+  name: border01_vlan20
+  id: 20
+  address:
+    - "10.1.20.2/24"
+  address_virtual:
+    - "00:00:00:00:00:1a 10.1.20.1/24"
+border02_vlan20:
+  name: border02_vlan20
+  id: 20
+  address:
+    - "10.1.20.3/24"
+  address_virtual:
+    - "00:00:00:00:00:1a 10.1.20.1/24"

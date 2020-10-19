@@ -1,0 +1,25 @@
+---
+mlagBondProfileA:
+  bridge_access: 10
+  extras:
+    - "bond-lacp-bypass-allow yes"
+    - "mstpctl-bpduguard yes"
+    - "mstpctl-portadminedge yes"
+mlagBondProfileB:
+  bridge_access: 20
+  extras:
+    - "bond-lacp-bypass-allow yes"
+    - "mstpctl-bpduguard yes"
+    - "mstpctl-portadminedge yes"
+mlagBondProfileC:
+  bridge_access: 30
+  extras:
+    - "bond-lacp-bypass-allow yes"
+    - "mstpctl-bpduguard yes"
+    - "mstpctl-portadminedge yes"
+mlagBondProfileFW:
+  bridge_vids: [10, 20, 30]
+  extras:
+    - "bond-lacp-bypass-allow yes"
+    - "mstpctl-bpduguard yes"
+    - "mstpctl-portadminedge yes"

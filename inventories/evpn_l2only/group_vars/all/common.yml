@@ -1,0 +1,6 @@
+---
+fabric_name: evpn_l2only
+bgp_asn_prefix: 651
+vxlan_local_loopback_subnet: 10.10.10
+vxlan_anycast_loopback_subnet: 10.0.1
+mlag_sysmac_prefix: 44:38:39:BE:EF

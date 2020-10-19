@@ -1,0 +1,6 @@
+{{ ansible_managed }}
+zebra=yes
+bgpd=yes
+{% if evpn_mh is defined %}
+pimd=yes
+{% endif %}

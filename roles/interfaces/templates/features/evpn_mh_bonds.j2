@@ -1,0 +1,38 @@
+{% if comments|default(False) %}
+###############
+# EVPN_MH Bonds
+###############
+{{ evpn_mh.bonds | to_nice_yaml | comment(prefix='# evpn_mh.bonds:', postfix='') -}}
+{% endif %}
+{% for bond in evpn_mh.bonds %}
+{%   for port in bond.ports %}
+auto {{ port }}
+iface {{ port }}
+    alias bond member of {{ bond.name }}
+    mtu 9000
+{%   endfor %}
+auto {{ bond.name }}
+iface {{ bond.name }}
+    alias {{ bond.name }} on {{ bond.ports|join(' and ') }}
+    mtu 9000
+    es-sys-mac {{ evpn_mh.sysmac }}
+    bond-mode 802.3ad
+    bond-min-links 1
+    bond-lacp-rate 1
+{%   if bond.profile.bridge_access is defined %}
+    bridge-access {{ bond.profile.bridge_access }}
+{%   endif %}
+{%   if bond.profile.bridge_vids is defined %}
+    bridge-vids {{ bond.profile.bridge_vids|join(' ') }}
+{%   endif %}
+{%   if bond.profile.bridge_pvid is defined %}
+    bridge-pvid {{ bond.profile.bridge_pvid }}
+{%   endif %}
+    bond-slaves {% for port in bond.ports %}{{ port }} {% endfor %}
+
+{%   for extra in bond.profile.extras|default() %}
+    {{ extra }}
+{%   endfor %}
+
+{% endfor %}
+

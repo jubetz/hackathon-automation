@@ -1,0 +1,5 @@
+---
+leaf_spine_interface:
+  name: leaf_spine
+  extras:
+    - "alias leaf to spine"

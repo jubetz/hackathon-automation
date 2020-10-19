@@ -1,0 +1,116 @@
+# Ansible Managed File
+auto lo
+iface lo inet loopback
+    address 10.10.10.2/32
+    clagd-vxlan-anycast-ip 10.0.1.1
+    vxlan-local-tunnelip 10.10.10.2
+auto mgmt
+iface mgmt
+    vrf-table auto
+    address 127.0.0.1/8
+    address ::1/128
+
+
+auto eth0
+iface eth0 inet dhcp
+    vrf mgmt
+auto bridge
+iface bridge
+    bridge-ports peerlink
+    bridge-ports bond1 bond2 
+    bridge-ports vni10 vni20 
+    bridge-vids 10 20  
+    bridge-vlan-aware yes
+
+auto vni10
+iface vni10
+    bridge-access 10
+    vxlan-id 10
+    mstpctl-portbpdufilter yes
+    mstpctl-bpduguard yes
+    bridge-learning off
+    bridge-arp-nd-suppress on
+auto vni20
+iface vni20
+    bridge-access 20
+    vxlan-id 20
+    mstpctl-portbpdufilter yes
+    mstpctl-bpduguard yes
+    bridge-learning off
+    bridge-arp-nd-suppress on
+auto vlan10
+iface vlan10
+    vlan-raw-device bridge
+    vlan-id 10
+    ip-forward off
+    ip6-forward off
+
+auto vlan20
+iface vlan20
+    vlan-raw-device bridge
+    vlan-id 20
+    ip-forward off
+    ip6-forward off
+
+ auto swp51
+iface swp51
+    alias leaf to spine
+ 
+auto swp52
+iface swp52
+    alias leaf to spine
+ 
+auto swp53
+iface swp53
+    alias leaf to spine
+ 
+auto swp54
+iface swp54
+    alias leaf to spine
+ 
+auto swp49
+iface swp49
+    alias peerlink
+auto swp50
+iface swp50
+    alias peerlink
+auto peerlink
+iface peerlink
+    bond-slaves swp49 swp50 
+auto peerlink.4094
+iface peerlink.4094
+    clagd-backup-ip 10.10.10.1
+    clagd-peer-ip linklocal
+    clagd-priority 32768
+    clagd-sys-mac 44:38:39:BE:EF:AA
+
+auto swp1
+iface swp1
+    alias bond member of bond1
+    mtu 9000
+auto bond1
+iface bond1
+    alias bond1 on swp1
+    mtu 9000
+    clag-id 1
+    bridge-access 10
+    bond-slaves swp1 
+    bond-lacp-bypass-allow yes
+    mstpctl-bpduguard yes
+    mstpctl-portadminedge yes
+
+auto swp2
+iface swp2
+    alias bond member of bond2
+    mtu 9000
+auto bond2
+iface bond2
+    alias bond2 on swp2
+    mtu 9000
+    clag-id 2
+    bridge-access 20
+    bond-slaves swp2 
+    bond-lacp-bypass-allow yes
+    mstpctl-bpduguard yes
+    mstpctl-portadminedge yes
+

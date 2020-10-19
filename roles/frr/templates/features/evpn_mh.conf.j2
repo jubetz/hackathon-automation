@@ -1,0 +1,47 @@
+ip pim rp {{ multicast.rpaddr|ipaddr('address') }} {{ multicast.rp_mcast_range }}
+ip pim ecmp
+ip pim keep-alive-timer 3600
+
+{% if evpn_mh.rp > 0 %}
+ip msdp mesh-group rpmesh source {{ bgp.router_id }}
+{% for neighbor in multicast.rpmesh %}
+{% if neighbor != inventory_hostname %}
+ip msdp mesh-group rpmesh member {{ hostvars[neighbor].bgp.router_id }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+interface lo
+  ip pim
+  ip igmp
+
+interface ipmr-lo
+  ip pim
+{% if evpn_mh.rp > 0 %}
+  ip pim use-source {{ bgp.router_id }}
+{% endif %}
+
+{% for interface in interfaces %}
+interface {{ interface.name }}
+{% if evpn_mh.bonds is defined %}
+  evpn mh uplink
+{% endif %}
+  ip pim
+{% endfor %}
+
+{% if evpn_mh.rp > 0 %}
+interface rp_link
+  ip pim
+{% endif %}
+
+{% if evpn_mh.bonds is defined %}
+{% for bond in evpn_mh.bonds %}
+interface {{ bond.name }}
+{% if evpn_mh.rp > 1 %}
+  evpn mh es-df-pref {{ evpn_mh.rp }}
+{% endif %}
+  evpn mh es-id {{ bond.id }}
+  evpn mh es-sys-mac {{ evpn_mh.sysmac }}
+{% endfor %}
+
+{% endif %}

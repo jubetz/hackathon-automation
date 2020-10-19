@@ -1,0 +1,27 @@
+loopback:
+  ips:
+    - "{{underlay_loopback_subnet}}.4/32"
+interfaces:
+  - { name: swp1, profile: "{{ leaf_spine_interface }}" }
+  - { name: swp2, profile: "{{ leaf_spine_interface }}" }
+  - { name: swp51, profile: "{{ leaf_spine_interface }}" }
+  - { name: swp52, profile: "{{ leaf_spine_interface }}" }
+bgp:
+  asn: "{{ bgp_asn_prefix }}04"
+  router_id: "{{underlay_loopback_subnet}}.4"
+  peergroups:
+    - { name: underlay, remote_as: external }
+  neighbors:
+    - { interface: swp1, unnumbered: yes, peergroup: underlay }
+    - { interface: swp2, unnumbered: yes, peergroup: underlay }
+    - { interface: swp51, unnumbered: yes, peergroup: underlay }
+    - { interface: swp52, unnumbered: yes, peergroup: underlay }
+  extras:
+    - "bgp bestpath as-path multipath-relax"
+  address_family:
+    - name: ipv4_unicast
+      redistribute:
+        - { type: connected }
+    - name: l2vpn_evpn
+      neighbors:
+        - { interface: underlay, activate: yes }

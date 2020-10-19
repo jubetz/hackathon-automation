@@ -1,0 +1,18 @@
+{{ ansible_managed }}
+frr defaults datacenter
+hostname {{ inventory_hostname }}
+username cumulus nopassword
+!
+service integrated-vtysh-config
+!
+log syslog informational
+!
+{% if evpn_mh is defined %}
+{% include './features/evpn_mh.conf.j2' %}
+{% endif %}
+!
+{% include './features/bgp.conf.j2' %}
+
+!
+line vty
+!

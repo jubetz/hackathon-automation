@@ -1,0 +1,19 @@
+{% if comments|default(False) %}
+###############
+# EVPN_MH rp_link for RPs
+###############
+{{ evpn_mh.sysmac | to_nice_yaml | comment(prefix='# evpn_mh.sysmac:', postfix='') }}
+{{ evpn_mh.rp_links | to_nice_yaml | comment(prefix='# evpn_mh.rp_links:', postfix='') -}}
+{% endif %}
+{% for interface in evpn_mh.rp_links %}
+auto {{ interface }}
+iface {{ interface }}
+    alias rp_link
+{% endfor %}
+auto rp_link
+iface rp_link
+    bond-slaves {% for interface in evpn_mh.rp_links %}{{ interface }} {% endfor %}
+
+{% for extra in rp_link.extras|default() %}
+    {{ extra }}
+{% endfor %}

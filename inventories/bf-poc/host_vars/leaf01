@@ -29,7 +29,7 @@ vrf:
   - "{{ vrf_RED }}"
   - "{{ vrf_BLUE }}"
 bgp:
-  asn: "{{ bgp_asn_prefix }}1"
+  asn: "{{ bgp_asn_prefix }}01"
   router_id: "{{underlay_loopback_subnet}}.1"
   peergroups:
     - { name: underlay, remote_as: external }

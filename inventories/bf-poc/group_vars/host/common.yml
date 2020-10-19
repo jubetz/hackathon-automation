@@ -14,3 +14,11 @@ devices:
       route:
         dest: 10.0.0.0/8
         nexthop: 10.1.20.1
+  server03:
+    bond:
+      vlan: 30
+      ip: 10.1.30.103/24
+      route:
+        dest: 10.0.0.0/8
+        nexthop: 10.1.30.1
+

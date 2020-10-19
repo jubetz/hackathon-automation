@@ -5,9 +5,6 @@ interfaces:
   - { name: swp1, profile: "{{ leaf_spine_interface }}" }
   - { name: swp2, profile: "{{ leaf_spine_interface }}" }
   - { name: swp3, profile: "{{ leaf_spine_interface }}" }
-  - { name: swp4, profile: "{{ leaf_spine_interface }}" }
-  - { name: swp5, profile: "{{ leaf_spine_interface }}" }
-  - { name: swp6, profile: "{{ leaf_spine_interface }}" }
 bgp:
   asn: "{{ bgp_asn_prefix }}99"
   router_id: "{{underlay_loopback_subnet}}.101"
@@ -17,9 +14,6 @@ bgp:
     - { interface: swp1, unnumbered: yes, peergroup: underlay }
     - { interface: swp2, unnumbered: yes, peergroup: underlay }
     - { interface: swp3, unnumbered: yes, peergroup: underlay }
-    - { interface: swp4, unnumbered: yes, peergroup: underlay }
-    - { interface: swp5, unnumbered: yes, peergroup: underlay }
-    - { interface: swp6, unnumbered: yes, peergroup: underlay }
   extras:
     - "bgp bestpath as-path multipath-relax"
   address_family:

@@ -5,23 +5,16 @@ ansible_ssh_pass=CumulusLinux!
 [leaf]
 leaf01
 leaf02
-leaf03
-leaf04
-server01
-server02
-server03
-server04
 
 [spine]
 spine01
 spine02
 
 [host]
-
+server01
+server02
 
 [pod1:children]
 leaf
 spine
-
-[netq]
-netq-ts
+host

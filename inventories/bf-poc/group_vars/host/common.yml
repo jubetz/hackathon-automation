@@ -14,17 +14,3 @@ devices:
       route:
         dest: 10.0.0.0/8
         nexthop: 10.1.20.1
-  server04:
-    bond:
-      vlan: 10
-      ip: 10.1.10.104/24
-      route:
-        dest: 10.0.0.0/8
-        nexthop: 10.1.10.1
-  server05:
-    bond:
-      vlan: 20
-      ip: 10.1.20.105/24
-      route:
-        dest: 10.0.0.0/8
-        nexthop: 10.1.20.1

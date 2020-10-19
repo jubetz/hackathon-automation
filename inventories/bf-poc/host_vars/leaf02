@@ -1,19 +1,39 @@
 loopback:
   ips:
-    - "{{underlay_loopback_subnet}}.2/32"
+    - "{{underlay_loopback_subnet}}.2/32" 
+    - "{{vxlan_local_loopback_subnet}}.2/32"
+  vxlan_local_tunnel_ip: "{{vxlan_local_loopback_subnet}}.2"
 interfaces:
-  - { name: swp1, profile: "{{ leaf_spine_interface }}" }
-  - { name: swp2, profile: "{{ leaf_spine_interface }}" }
   - { name: swp51, profile: "{{ leaf_spine_interface }}" }
   - { name: swp52, profile: "{{ leaf_spine_interface }}" }
+vnis:
+  - "{{ vni10_leaf }}"
+  - "{{ vni20_leaf }}"
+  - "{{ vni30_leaf }}"
+  - "{{ vniRED_leaf }}"
+  - "{{ vniBLUE_leaf }}"
+bridge:
+  vids:
+    - 10
+    - 20
+    - 30
+    - 4001
+    - 4002
+vlans:
+  - "{{ leaf_vlan10 }}"
+  - "{{ leaf_vlan20 }}"
+  - "{{ leaf_vlan30 }}" 
+  - "{{ leaf_vlan4001 }}"
+  - "{{ leaf_vlan4002 }}"
+vrf:
+  - "{{ vrf_RED }}"
+  - "{{ vrf_BLUE }}"
 bgp:
-  asn: "{{ bgp_asn_prefix }}02"
+  asn: "{{ bgp_asn_prefix }}2"
   router_id: "{{underlay_loopback_subnet}}.2"
   peergroups:
     - { name: underlay, remote_as: external }
   neighbors:
-    - { interface: swp1, unnumbered: yes, peergroup: underlay }
-    - { interface: swp2, unnumbered: yes, peergroup: underlay }
     - { interface: swp51, unnumbered: yes, peergroup: underlay }
     - { interface: swp52, unnumbered: yes, peergroup: underlay }
   extras:
@@ -25,3 +45,4 @@ bgp:
     - name: l2vpn_evpn
       neighbors:
         - { interface: underlay, activate: yes }
+      advertise_all_vni: yes

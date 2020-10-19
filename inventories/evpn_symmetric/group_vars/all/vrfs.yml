@@ -1,7 +1,0 @@
----
-vrf_RED:
-  name: RED
-  vxlan_id: 4001
-vrf_BLUE:
-  name: BLUE
-  vxlan_id: 4002

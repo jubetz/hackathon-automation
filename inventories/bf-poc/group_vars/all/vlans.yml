@@ -4,49 +4,22 @@ leaf_vlan10:
   id: 10
   vrf: RED
   address:
-    - "10.1.10.2/24"
-  address_virtual:
-    - "00:00:00:00:00:1a 10.1.10.1/24"
-leaf_vlan10b:
-  name: leaf_vlan10b
-  id: 10
-  vrf: RED
-  address:
-    - "10.1.10.3/24"
-  address_virtual:
-    - "00:00:00:00:00:1a 10.1.10.1/24"
+    - "10.1.10.1/24"
+  hwaddress: 00:00:00:00:00:1a
 leaf_vlan20:
   name: leaf_vlan20
   id: 20
   vrf: RED
   address:
-    - "10.1.20.2/24"
-  address_virtual:
-    - "00:00:00:00:00:1b 10.1.20.1/24"
-leaf_vlan20b:
-  name: leaf_vlan20b
-  id: 20
-  vrf: RED
-  address:
-    - "10.1.20.3/24"
-  address_virtual:
-    - "00:00:00:00:00:1b 10.1.20.1/24"
+    - "10.1.20.1/24"
+  hwaddress: 00:00:00:00:00:1b
 leaf_vlan30:
   name: leaf_vlan30
   id: 30
   vrf: BLUE
   address:
-    - "10.1.30.2/24"
-  address_virtual:
-    - "00:00:00:00:00:1c 10.1.30.1/24"
-leaf_vlan30b:
-  name: leaf_vlan30b
-  id: 30
-  vrf: BLUE
-  address:
-    - "10.1.30.3/24"
-  address_virtual:
-    - "00:00:00:00:00:1c 10.1.30.1/24"
+    - "10.1.30.1/24"
+  hwaddress: 00:00:00:00:00:1c
 leaf_vlan4001:
   name: vlan4001
   id: 4001

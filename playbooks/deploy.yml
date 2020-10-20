@@ -10,7 +10,6 @@
     - { role: snmp, tags: ['snmp'] }
     - { role: syslog, tags: ['syslog'] }
     - { role: ntp, tags: ['ntp'] }
-    - { role: tacacs_client, tags: ['tacacs_client'] }
     - { role: interfaces, tags: ['interfaces'] }
     - { role: frr, tags: ['frr'] }
     - { role: backup, tags: ['backup'] }
@@ -47,10 +46,4 @@
   roles:
     - { role: servers, tags: ['servers'] }
     - { role: backup, tags: ['backup'] }
-    #- { role: netq_servers, tags: ['netq_servers'] }
-
-- hosts: localhost
-  become: yes
-  roles:
-    - { role: tacacs_server, tags: ['tacacs_server'] }
     #- { role: netq_servers, tags: ['netq_servers'] }

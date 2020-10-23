@@ -1,8 +1,7 @@
 loopback:
   ips:
     - "{{underlay_loopback_subnet}}.1/32" 
-    - "{{vxlan_local_loopback_subnet}}.1/32"
-  vxlan_local_tunnel_ip: "{{vxlan_local_loopback_subnet}}.1"
+  vxlan_local_tunnel_ip: "{{underlay_loopback_subnet}}.1"
 interfaces:
   - { name: swp51, profile: "{{ leaf_spine_interface }}" }
   - { name: swp52, profile: "{{ leaf_spine_interface }}" }
